@@ -4,20 +4,33 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vanilla App Template</title>
+    <title>Homework 11 - Pixabay Search with Vanilla App Template</title>
     <link rel="stylesheet" href="./css/styles.css" />
+    <script type="module" src="./main.js" defer></script>
   </head>
   <body>
-    <load src="./partials/header.html" icon-path="img/sprite.svg#logo" />
-
     <main>
-      <!-- Loads the specified .html file -->
-      <load src="./partials/vite-promo.html" />
-      <load src="./partials/badges.html" />
+      <div class="container">
+        <form class="form">
+          <input
+            class="form-keywords"
+            type="text"
+            name="keywords"
+            placeholder="Search images..."
+            required
+          />
+          <button class="button" type="submit">Search</button>
+        </form>
+      </div>
+      <div class="container">
+        <div class="hidden loading">
+          <span class="loader"></span>
+          <span>Loading images, please wait...</span>
+        </div>
+      </div>
+      <div class="container">
+        <ul class="gallery"></ul>
+      </div>
     </main>
-
-    <load src="./partials/footer.html" />
-
-    <script type="module" src="./main.js"></script>
   </body>
 </html>
