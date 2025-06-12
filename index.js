@@ -1,28 +1,28 @@
-import{a as f,S as m,i as l}from"./assets/vendor-DT131awv.js";(function(){const o=document.createElement("link").relList;if(o&&o.supports&&o.supports("modulepreload"))return;for(const e of document.querySelectorAll('link[rel="modulepreload"]'))n(e);new MutationObserver(e=>{for(const r of e)if(r.type==="childList")for(const s of r.addedNodes)s.tagName==="LINK"&&s.rel==="modulepreload"&&n(s)}).observe(document,{childList:!0,subtree:!0});function i(e){const r={};return e.integrity&&(r.integrity=e.integrity),e.referrerPolicy&&(r.referrerPolicy=e.referrerPolicy),e.crossOrigin==="use-credentials"?r.credentials="include":e.crossOrigin==="anonymous"?r.credentials="omit":r.credentials="same-origin",r}function n(e){if(e.ep)return;e.ep=!0;const r=i(e);fetch(e.href,r)}})();const p="50720875-9e46c15e3f43f509a571f7064",h="https://pixabay.com/api/";function g(t){const o=`${h}?key=${p}&q=${t}&image_type=photo&orientation=horizontal&safesearch=true&page=1&per_page=20`;return f.get(o).then(i=>i).catch(i=>{throw new Error(i)})}const y=document.querySelector(".gallery");let v=new m(".image-li a",{captionDelay:250,captionsData:"alt"});function b(t){const o=t.map(({largeImageURL:i,webformatURL:n,tags:e,likes:r,views:s,comments:d,downloads:u})=>`<li class="image-li">
-           <a href="${i}"> <img class="li-img" src="${n}" alt="${e.split(",").slice(0,3).join(",")}"> </a>
+import{a as $,S,i as n}from"./assets/vendor-DT131awv.js";(function(){const e=document.createElement("link").relList;if(e&&e.supports&&e.supports("modulepreload"))return;for(const t of document.querySelectorAll('link[rel="modulepreload"]'))o(t);new MutationObserver(t=>{for(const i of t)if(i.type==="childList")for(const l of i.addedNodes)l.tagName==="LINK"&&l.rel==="modulepreload"&&o(l)}).observe(document,{childList:!0,subtree:!0});function s(t){const i={};return t.integrity&&(i.integrity=t.integrity),t.referrerPolicy&&(i.referrerPolicy=t.referrerPolicy),t.crossOrigin==="use-credentials"?i.credentials="include":t.crossOrigin==="anonymous"?i.credentials="omit":i.credentials="same-origin",i}function o(t){if(t.ep)return;t.ep=!0;const i=s(t);fetch(t.href,i)}})();const q="50720875-9e46c15e3f43f509a571f7064",E="https://pixabay.com/api/";async function g(r,e=1,s=40){try{const o=`${E}?key=${q}&q=${r}&image_type=photo&orientation=horizontal&safesearch=true&page=${e}&per_page=${s}`;return(await $.get(o)).data}catch(o){throw o}}const P=document.querySelector(".gallery"),p=document.getElementById("load-more-btn");let B=new S(".image-li a",{captionDelay:250,captionsData:"alt"});function y(r){const e=r.map(({largeImageURL:s,webformatURL:o,tags:t,likes:i,views:l,comments:L,downloads:w})=>`<li class="image-li">
+           <a href="${s}"> <img class="li-img" src="${o}" alt="${t.split(",").slice(0,3).join(",")}"> </a>
           <div class="div-upper">
             <ul>
             <li>
               <div class="div-inner"><b>Likes</b>
-            ${r}</div>
+            ${i}</div>
             </li>
 
             <li>
              <div class="div-inner"><b>Views</b>
-            ${s}</div>
+            ${l}</div>
             </li>
 
             <li>
               <div class="div-inner"><b>Comments</b>
-            ${d}</div>
+            ${L}</div>
             </li>
 
             <li>
              <div class="div-inner"><b>Downloads</b>
-            ${u}</div>
+            ${w}</div>
             </li>
 
             </ul>
           </div>
-        </li>`).join("");y.insertAdjacentHTML("beforeend",o),v.refresh()}function L(){const t=document.querySelector(".gallery");t&&(t.innerHTML="")}function w(){var t;(t=document.querySelector(".loading"))==null||t.classList.remove("hidden")}function a(){var t;(t=document.querySelector(".loading"))==null||t.classList.add("hidden")}const c=document.querySelector(".form"),S=document.querySelector('input[name="keywords"]');c.addEventListener("submit",t=>{t.preventDefault();const o=S.value.trim();if(L(),w(),!o)return a(),l.error({title:"Error",message:"Please enter a search term.",position:"topRight"});g(o).then(i=>{if(i.data.hits.length<=0){a(),l.error({title:"Error",message:"Sorry, there are no images matching your search query. Please try again!",position:"topRight"}),c.reset();return}b(i.data.hits),a(),c.reset()}).catch(i=>{a(),l.error({title:"Error",message:i.message,position:"topRight"})})});
+        </li>`).join("");P.insertAdjacentHTML("beforeend",e),B.refresh()}function M(){const r=document.querySelector(".gallery");r&&(r.innerHTML="")}function v(){var r;(r=document.querySelector(".loading"))==null||r.classList.remove("hidden")}function c(){var r;(r=document.querySelector(".loading"))==null||r.classList.add("hidden")}function b(){p.classList.remove("hidden")}function u(){p.classList.add("hidden")}const m=document.querySelector(".form"),R=document.querySelector('input[name="keywords"]'),H=document.getElementById("load-more-btn");let d="",a=1;const h=40;let f=0;m.addEventListener("submit",async r=>{if(r.preventDefault(),a=1,d=R.value.trim(),M(),v(),u(),!d)return c(),n.error({title:"Error",message:"Please enter a search term.",position:"topRight"});try{const e=await g(d,a);if(f=Math.ceil(e.totalHits/h),!e||!e.hits||e.hits.length===0){c(),n.error({title:"Error",message:"Sorry, there are no images matching your search query. Please try again!",position:"topRight"}),m.reset();return}y(e.hits),e.totalHits<=h||a>=f?u():b()}catch(e){n.error({title:"Error",message:e.message,position:"topRight"})}finally{c()}});H.addEventListener("click",async r=>{a++,v();try{const e=await g(d,a);if(!e||!e.hits||e.hits.length===0){c(),n.error({title:"Error",message:"Sorry, there are no images matching your search query. Please try again!",position:"topRight"}),m.reset();return}y(e.hits),e.hits.length<h||a>=f?(u(),n.info({position:"topRight",message:"We're sorry, but you've reached the end of search results"})):b();const s=document.querySelector(".image-li");if(s){const{height:o}=s.getBoundingClientRect();window.scrollBy({top:o*2,behavior:"smooth"})}}catch(e){n.error({title:"Error",message:e.message,position:"topRight"})}finally{c()}});
 //# sourceMappingURL=index.js.map
